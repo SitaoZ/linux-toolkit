@@ -78,6 +78,20 @@ $ printf "\n" >> filename.sh
 
 ```
 
+- 替换CSV文件中的回车符号
+```bash
+$ cat a.csv
+1^MA
+2^MB
+
+# ^M 使用 CTRL+V CTRL+M生成
+$ sed -i 's/^M//g' a.csv
+
+$ cat a.csv
+1 A
+2 B
+```
+
 - 循环脚本
 ```bash
 $ for f in $(ls *.sh); do wc ${f}; done
