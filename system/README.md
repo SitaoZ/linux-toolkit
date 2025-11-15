@@ -11,7 +11,8 @@ netstat -tuln
 
 ```
 
-- kill listening port
+- 关闭监听端口
+kill listening port
 ```bash
 lsof -i:8000            # 查看该端口的监听情况
 kill $(lsof -t -i:8000) # 杀掉该监听端口
@@ -47,7 +48,7 @@ $ sudo yum install dnf
 # 解决方案是，在~/.bashrc中取消lib or lib64的LD_LIBRARY_PATH导入，注销用户再次登陆即可解决
 ldd /usr/lib64/python2.7/site-packages/pycurl.so
 ```
--strings
+- strings
 
 ```bash
 # 查看lib文库
