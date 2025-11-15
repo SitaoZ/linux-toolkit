@@ -39,3 +39,11 @@ $ sudo yum install epel-release # yum install epel-release -y
 $ sudo yum install dnf
 
 ```
+
+- ldd
+```bash
+# ldd 检查动态库依赖关系
+# yum 使用不了，可以查看python的pycurl.so的依赖关系，和可能是你安装的python3的动态库，连接到系统的yuml
+# 解决方案是，在~/.bashrc中取消lib or lib64的LD_LIBRARY_PATH导入，注销用户再次登陆即可解决
+ldd /usr/lib64/python2.7/site-packages/pycurl.so
+```
