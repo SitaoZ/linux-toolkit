@@ -47,3 +47,9 @@ $ sudo yum install dnf
 # 解决方案是，在~/.bashrc中取消lib or lib64的LD_LIBRARY_PATH导入，注销用户再次登陆即可解决
 ldd /usr/lib64/python2.7/site-packages/pycurl.so
 ```
+-strings
+
+```bash
+# 查看lib文库
+strings /lib64/libc.so.6 | grep -E "^GLIBC_" 
+```
