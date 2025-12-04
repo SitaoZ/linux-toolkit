@@ -255,6 +255,54 @@ $ awk '{print "'\''"}' # 单引号
 awk -v bait=$2 'NR==1 || $0 ~ bait' $1 | csvtk pretty -t
 ```
 
+- 每一行的单词添加双引号
+```bash
+cat amino
+# A	Ala	Alanine
+# C	Cys	Cysteine
+# D	Asp	Aspartic Acid
+# E	Glu	Glutamic Acid
+# F	Phe	Phenylalanine
+# G	Gly	Glycine
+# H	His	Histidine
+# I	Ile	Isoleucine
+# K	Lys	Lysine
+# L	Leu	Leucine
+# M	Met	Methionine
+# N	Asn	Asparagine
+# P	Pro	Proline
+# Q	Gln	Glutamine
+# R	Arg	Arginine
+# S	Ser	Serine
+# T	Thr	Threonine
+# V	Val	Valine
+# W	Trp	Tryptophan
+# Y	Tyr	Tyrosine
+cat amino | | awk '{for(i=1;i<=NF;i++){printf("\"%s\"%s", $i, i==NF?"\n":",")}}' | awk '{print "[" $0 "],"}'
+# ["A","Ala","Alanine"],
+# ["C","Cys","Cysteine"],
+# ["D","Asp","Aspartic","Acid"],
+# ["E","Glu","Glutamic","Acid"],
+# ["F","Phe","Phenylalanine"],
+# ["G","Gly","Glycine"],
+# ["H","His","Histidine"],
+# ["I","Ile","Isoleucine"],
+# ["K","Lys","Lysine"],
+# ["L","Leu","Leucine"],
+# ["M","Met","Methionine"],
+# ["N","Asn","Asparagine"],
+# ["P","Pro","Proline"],
+# ["Q","Gln","Glutamine"],
+# ["R","Arg","Arginine"],
+# ["S","Ser","Serine"],
+# ["T","Thr","Threonine"],
+# ["V","Val","Valine"],
+# ["W","Trp","Tryptophan"],
+# ["Y","Tyr","Tyrosine"],
+```
+
+
+
 
 ### **grep**
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
