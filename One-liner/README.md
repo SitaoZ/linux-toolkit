@@ -735,6 +735,11 @@ END {
 }
 ```
 
+- gtf/gff 排序
+```bash
+sort -k '1,1' -k '4,4n' -k '5,5n' aaa.gtf > aa.sort.gtf
+```
+
 ### vcf 
 - 按染色体提取vcf
 ```bash
