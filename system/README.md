@@ -1,6 +1,25 @@
 ## linux 运维
 主要收集和linux系统维护与管理相关的命令
+- 查看linux版本信息
+```bash
+# 1
+cat /proc/version
+# 2
+cat /etc/os-release
+# 3
+cat /etc/issue
+# 4
+lsb_release -a
+# 5
+uname -a
+# 6
+uname -r
+# 7
+hostnamectl
 
+
+
+```
 - 查看端口
 ```bash
 netstat -tuln
