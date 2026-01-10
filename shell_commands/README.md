@@ -7,6 +7,7 @@
 * [查找文件](#查找文件)
 * [用户管理](#用户管理)
 * [网络操作](#网络操作)
+* [文件传输](#文件传输)
 * [文件处理](#文件处理)
 * [文件权限](#文件权限)
 * [进程管理](#进程管理)
@@ -203,7 +204,17 @@ $ man ifstat
 $ man sar
 $ 
 ```
+### 文件传输
+- scp
+注意：涉及软连接时，scp会将软连接的数据也跟随拷贝。存在软连接时，使用rsyns。
+```bash
 
+```
+- rsync
+```bash
+# --links 要完全保持软连接本身（不跟随）
+rsync -avz --links zhusitao@115.156.67.2:/data/zhusitao/project/songLab/05.MiMeDB  .
+```
 ### 文件处理
 ```bash
 $ touch filea     # 创建文件 create file 
