@@ -27,6 +27,9 @@ $ scontrol show node |  grep "mem=" | grep "cpu=" | cut -d , -f 1 | cut -d = -f 
 任务查看
 
 ```bash
+# 查看信息（字段，参数）
+man squeue
+
 # 帮助信息
 squeue --help
 
@@ -40,7 +43,7 @@ squeue -u `whoami`
 squeue -o "%.18i %.9P %.12j %.12u %.12T %.12M %.16l %.6D %R" -u zhusitao
 
 # 简写
-echo "alias sq='squeue -o \"%.18i %.9P %.12j %.12u %.12T %.12M %.16l %.6D %R\" -u zhusitao'" >> ~/.bashrc
+echo "alias sq='squeue -o "%.18i %.9P %.12j %.12u %.12T %.12M %.16l %.6D %R" -u zhusitao'" >> ~/.bashrc
 
 ```
 ### sbatch 
@@ -59,8 +62,59 @@ cat xxx.slurm
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 sh work.sh
-
+```
+```bash
 sbatch xxx.slurm 
 ```
 
+- 指定node
+```bash
+#SBATCH --nodelist=n[0050-0053],n0180
+```
+
+### sacctmgr
+- 查看用户的优先级
+```bash
+sacctmgr show ass user=`whoami`  format=user,part,qos
+
+```
+
 ### scancel
+
+- 取消作业ID为92的作业
+```bash
+scancel 92
+```
+
+- 取消自己名下的全部作业
+```bash
+# 注意whoami前后不是单引号
+scancel -u `whoami`
+```
+
+- 取消自己账号下所有状态为PENDING的作业
+```bash
+scancel -t PENDING -u `whoami`
+```
+
+- scancel 常见参数
+```bash
+--help                # 显示scancel命令的使用帮助信息；
+-A <account>          # 取消指定账户的作业，如果没有指定job_id,将取消所有；
+-n <job_name>         # 取消指定作业名的作业；
+-p <partition_name>   # 取消指定分区的作业；
+-q <qos>              # 取消指定qos的作业；
+-t <job_state_name>   # 取消指定作态的作业，"PENDING", "RUNNING" 或 "SUSPENDED"；
+-u <user_name>        # 取消指定用户下的作业；
+```
+
+### sacct & scontrol
+- scontrol
+```
+scontrol show job 92
+```
+
+- sacct
+```bash
+sacct -j 92
+```
