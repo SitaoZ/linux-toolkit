@@ -73,3 +73,13 @@ ldd /usr/lib64/python2.7/site-packages/pycurl.so
 # 查看lib文库
 strings /lib64/libc.so.6 | grep -E "^GLIBC_" 
 ```
+
+
+- visudo
+添加普通用户到sudoer
+
+```bash
+su root
+visudo # 修改/etc/sudoers文件
+zhusitao ALL=(ALL)     ALL
+```
