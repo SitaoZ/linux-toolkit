@@ -36,6 +36,26 @@ kill listening port
 lsof -i:8000            # 查看该端口的监听情况
 kill $(lsof -t -i:8000) # 杀掉该监听端口
 ```
+
+- 添加端口
+`python -m http.server 8000`远程访问不了，大概率是linux端口没正常开放
+```bash
+# CentOS/RHEL/Fedora (firewalld)
+sudo firewall-cmd --list-ports                    # 列出当前开放窗口
+# 8000
+sudo firewall-cmd --add-port=8000/tcp --permanent # 永久添加端口
+sudo firewall-cmd --reload                        
+
+# 8080
+sudo firewall-cmd --add-port=8000/tcp --permanent # 永久添加端口
+sudo firewall-cmd --reload 
+```
+- 查看监听状态
+```bash
+# 查看监听状态
+sudo ss -tlnp | grep :8080
+```
+
 - terminate called after throwing an instance of 'std::runtime_error'
 
 `terminate called after throwing an instance of 'std::runtime_error'  what():  locale::facet::_S_create_c_locale name not valid`
