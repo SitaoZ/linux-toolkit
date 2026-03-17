@@ -22,6 +22,19 @@ hostnamectl
 ```
 - 查看端口
 ```bash
+#ss
+# 查看所有监听端口
+ss -tlnp
+
+# 参数说明：
+# -t: TCP端口
+# -u: UDP端口  
+# -l: 仅显示监听端口
+# -n: 显示数字地址和端口号
+# -p: 显示进程信息
+
+
+#netstat
 netstat -tuln
 # -t: 显示TCP端口
 # -u: 显示UDP端口
