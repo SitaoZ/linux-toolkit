@@ -116,3 +116,25 @@ su root
 visudo # 修改/etc/sudoers文件
 zhusitao ALL=(ALL)     ALL
 ```
+
+- htop
+htop可以快速查看Linux服务器的运行状态，因此设置好查看面板，能容易快速查看内容。
+```bash
+# step1
+按F2 进入设置页面,出现如下内容：
+Display options
+Header layout
+Meters
+Screens
+Colors
+
+# step2
+上下键选择Meters
+按左右键，选择需要设置的列，在旁边Avaliable meters选择需要展示的内容，回车，左右键将其放入对应的列。
+
+# step3
+F9删除不需要展示的参数
+
+# step4
+F10保存退出
+```
