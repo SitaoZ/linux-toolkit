@@ -117,7 +117,7 @@ visudo # 修改/etc/sudoers文件
 zhusitao ALL=(ALL)     ALL
 ```
 
-- htop
+- htop  
 htop可以快速查看Linux服务器的运行状态，因此设置好查看面板，能容易快速查看内容。
 ```bash
 # step1
@@ -137,4 +137,15 @@ F9删除不需要展示的参数
 
 # step4
 F10保存退出
+```
+
+- pgrep & pkill   
+pgrep 命令的名称来源于 "process grep"，顾名思义，它能够像 grep 命令搜索文本那样搜索系统中的进程。
+pkill 用于杀死一个进程，与 kill 不同的是它会杀死指定名字的所有进程，类似于 killall 命令。
+```bash
+# 查看全部的jackhmmer进程
+pgrep -l jackhmmer |wc
+
+# 杀掉全部的 jackhmmer 进程
+pkill jackhmmer
 ```
