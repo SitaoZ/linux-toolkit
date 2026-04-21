@@ -17,9 +17,57 @@ uname -r
 # 7
 hostnamectl
 
-
-
 ```
+
+- CPU
+
+```bash
+# 查看 CPU 型号和基本信息
+lscpu
+
+# 查看详细 CPU 信息
+cat /proc/cpuinfo
+
+# 查看 CPU 统计信息（型号、核心数、频率等）
+lscpu | grep -E "Model name|Socket|Core|Thread|CPU MHz"
+
+# 查看 CPU 使用情况（实时）
+top -1      # 按 1 键查看每个核心
+htop        # 更友好的界面（需安装）
+```
+
+- 内存
+```bash
+# 查看内存总量和使用情况（人类可读）
+free -h
+
+# 查看详细内存信息
+cat /proc/meminfo
+
+# 查看内存使用情况（单位 GB）
+free -g
+
+# 查看内存硬件信息（如插槽、频率等）
+sudo dmidecode -t memory | grep -E "Size|Type|Speed"
+```
+
+- GPU
+
+```bash
+# 查看 GPU 状态（最常用）
+nvidia-smi
+
+# 实时监控 GPU（每 1 秒刷新）
+watch -n 1 nvidia-smi
+
+# 查看 GPU 详细信息
+nvidia-smi -q
+
+# 查看 GPU 显存使用
+nvidia-smi --query-gpu=memory.used,memory.total --format=csv
+```
+
+
 - 查看端口
 ```bash
 #ss
