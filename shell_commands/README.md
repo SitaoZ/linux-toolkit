@@ -93,6 +93,14 @@ $ touch /etc/cron.allow
 
 ```
 [crontab](https://linuxtools-rst.readthedocs.io/zh-cn/latest/tool/crontab.html)
+
+- watch
+execute a program periodically, showing output fullscreen
+
+```bash
+# 实时监控gpu 每秒刷新一次
+watch -n 1 nvidia-smi 
+```
 ### 系统用户登录信息
 ```bash
 $ whoami  # 显示当前用户的名称
