@@ -301,8 +301,47 @@ cat amino | | awk '{for(i=1;i<=NF;i++){printf("\"%s\"%s", $i, i==NF?"\n":",")}}'
 # ["Y","Tyr","Tyrosine"],
 ```
 
+- 删除最后一列
+```bash
+# omitted the last column
+awk '{$NF=""}1' Height_meta.clumped | head
+# awk 默认以空格或制表符作为字段分隔符。
+# $NF 代表当前行的最后一个字段（NF 是字段总数 Number of Fields）。
+# {$NF=""} 表示：将最后一个字段的内容赋值为空字符串。
+# 最后的 1 是 awk 的一个常用简写，代表 {print $0}，即打印整行内容（包括修改后的整行）。
 
+```
 
+- 按第一列合并第二列的值
+```bash
+cat a.txt
+# rs1014248165	GWAS
+# rs111072793	LDL_GLGC
+# rs111072793	TC_GLGC
+# rs111072793	TG_GLGC
+# rs111174028	LDL_GLGC
+# rs1222786	LDL_GLGC
+
+awk '{if (a[$1]) a[$1]=a[$1]","$2; else a[$1]=$2} END{for(i in a) print i"\t"a[i]}' a
+# rs111174028	LDL_GLGC
+# rs1222786	LDL_GLGC
+# rs1014248165	GWAS
+# rs111072793	LDL_GLGC,TC_GLGC,TG_GLGC
+
+# 解释
+## 这个模式相当于把相同第一列对应的所有第二列值收集起来
+# {if (a[$1]) a[$1]=a[$1]","$2; else a[$1]=$2}
+# a[] 是一个关联数组，以第一列 $1 的内容作为键
+# 判断 a[$1] 是否存在（即是否已经处理过该键）
+# 如果存在：将当前的值 $2 用逗号 , 拼接到已有内容的后面
+# 如果不存在：直接将 $2 作为该键的值
+
+# END{for(i in a) print i"\t"a[i]}
+# END：在所有行处理完后执行
+# for(i in a)：遍历数组中的所有键
+# print i"\t"a[i]：打印键（第一列的值）、制表符、收集到的值（逗号分隔的第二列）
+
+```
 
 ### **grep**
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
