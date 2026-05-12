@@ -343,6 +343,25 @@ awk '{if (a[$1]) a[$1]=a[$1]","$2; else a[$1]=$2} END{for(i in a) print i"\t"a[i
 
 ```
 
+- 表格转置
+```bash
+awk ''{for(i=1;i<=NF;i++)a[i]=a[i]"\t"$i}END{for(i=1;i<=NF;i++)print substr(a[i],2)}'
+# 第一部分：{for(i=1;i<=NF;i++) a[i]=a[i]"\t"$i}
+# 这是对输入文件的每一行执行的操作：
+# i=1;i<=NF;i++：循环遍历当前行的每一个字段（NF 是当前行的字段数）
+# a[i]：创建一个数组 a，索引是列号
+# a[i] = a[i] "\t" $i：将当前行的第 i 个字段追加到数组 a[i] 的末尾，并用制表符 \t 分隔
+
+# 第二部分：END{for(i=1;i<=NF;i++) print substr(a[i],2)}
+# 当所有行处理完后，执行 END 块：
+# for(i=1;i<=NF;i++)：循环每个列（注意这里 NF 是最后一行的字段数）
+# substr(a[i], 2)：关键操作，删除每个 a[i] 字符串开头的第一个字符
+# 因为我们在追加时，每个 a[i] 的开头都多了一个制表符 \t
+# 使用 substr(a[i], 2) 就是从第2个字符开始截取，去掉开头的制表符
+# print：输出处理后的每一行（即转置后的每一列）
+
+```
+------------------------------------------------------------------------------------------------------
 ### **grep**
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 ```bash
@@ -439,7 +458,10 @@ $ grep -v "pattern1" filename
 ```bash
 $ zgrep -v "^#" GCF_000001405.40_GRCh38.p14_genomic.gff.gz | awk 'BEGIN{FS="\t";OFS"\t"}$2=="RefSeqFE"&&$3!="biological_region"'
 ```
+#### 2.8 grep 使用集合
 
+
+---------------------------------------------------------------------------------------------------------------------------------
 ### **sed**
 sed (stream editor for filtering and transforming text)流式编辑器
 ```bash
@@ -578,3 +600,10 @@ $ cat file.txt | sed "s/$gene_id/PGK/g" # 替换基因名
 $ nl /etc/passwd | sed -e '3,$d' -e 's/bash/blueshell/' # -e表示多点编辑，第一个编辑命令删除第三行到末尾的数据，第二条命令搜索bash替换为blueshell
 ```
 [sed lecture](https://cs.nyu.edu/~mohri/unix08/lect5.pdf)
+
+#### sed 使用集合
+- 去除换行符
+```bash
+sed 's/\r//g' windows_file.txt > linux_file.txt
+tr -d '\r' < input > output
+```
