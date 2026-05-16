@@ -65,6 +65,12 @@ nvidia-smi -q
 
 # 查看 GPU 显存使用
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv
+
+# 检查GPU
+lspci | grep -i nvidia
+
+# 检查GPU
+dmesg -T | grep -i -E "nvidia|nvrm"
 ```
 
 
