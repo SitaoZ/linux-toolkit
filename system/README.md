@@ -73,6 +73,15 @@ lspci | grep -i nvidia
 dmesg -T | grep -i -E "nvidia|nvrm"
 ```
 
+- 查看看防火墙
+```bash
+# 查看已开放的端口
+sudo firewall-cmd --info-service=ssh
+
+# 查看 ssh 服务的详细信息
+sudo firewall-cmd --info-service=ssh
+
+```
 
 - 查看端口
 ```bash
