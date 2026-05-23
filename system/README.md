@@ -87,6 +87,8 @@ ss -tlnp
 # -n: 显示数字地址和端口号
 # -p: 显示进程信息
 
+# 查看正在监听的端口
+ss -tlnp | awk 'NR>1 {print $4}' | cut -d: -f2 | sort -n | uniq
 
 #netstat
 netstat -tuln
@@ -94,6 +96,9 @@ netstat -tuln
 # -u: 显示UDP端口
 # -l: 仅显示监听状态的端口
 # -n: 显示数字形式的地址和端口号，而不是尝试解析主机名和服务名
+
+# 查看正在监听的端口
+netstat -tlnp | grep LISTEN | awk '{print $4}' | cut -d: -f2 | sort -n | uniq
 
 ```
 
