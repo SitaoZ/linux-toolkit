@@ -124,3 +124,21 @@ conda activate bedtools # 再次激活环境
 ```bash
 conda install --solver=classic conda-forge::conda-libmamba-solver conda-forge::libmamba conda-forge::libmambapy conda-forge::libarchive
 ```
+### conda 环境突然消失
+```bash
+ls -l /home/zhusitao/miniconda3/envs/R4/conda-meta/history
+
+find /home/zhusitao/miniconda3/envs/R4/conda-meta \
+    -maxdepth 1 -name "*.json" | wc -l
+
+ls /home/zhusitao/miniconda3/envs/R4/conda-meta/ \
+    | grep '^r-base' | head
+
+du -sh /home/zhusitao/miniconda3/envs/R4/conda-meta
+```
+我碰到过history缺失，导致R4的环境消失，解决方法是创建一个新的history
+
+
+```bash
+touch /home/zhusitao/miniconda3/envs/R4/conda-meta/history
+```
