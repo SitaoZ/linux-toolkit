@@ -217,3 +217,34 @@ pgrep -l jackhmmer |wc
 # 杀掉全部的 jackhmmer 进程
 pkill jackhmmer
 ```
+
+- 查看系统内存溢出
+```bash
+sudo journalctl -k   --since "2026-08-29 15:16:00"   | grep -Ei "oom|out of memory|killed process"
+
+```
+```bash
+1. 命令主体：sudo journalctl -k
+
+sudo：以管理员权限运行（查看内核日志需要高权限）。
+
+journalctl：Systemd 的日志查看工具。
+
+-k：代表 --dmesg，只显示内核产生的日志（不包含用户态服务日志）。
+
+2. 时间过滤：--since "2026-08-29 15:16:00"
+
+只显示 2026年8月29日 15:16:00 之后产生的日志。这通常用于排查该时间点前后发生的故障。
+
+3. 内容过滤：| grep -Ei "oom|out of memory|killed process"
+
+|：管道符，将前一个命令的输出传给后一个命令。
+
+grep：文本搜索工具。
+
+-E：扩展正则表达式，允许使用逻辑“或”（|）。
+
+-i：忽略大小写。
+
+搜索的关键词是：oom、out of memory、killed process。
+```
