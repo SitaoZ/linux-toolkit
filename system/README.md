@@ -248,3 +248,22 @@ grep：文本搜索工具。
 
 搜索的关键词是：oom、out of memory、killed process。
 ```
+
+
+- 本地查看某个网站的端口是否开发
+```bash
+nc -vz baidu.com 80
+# Connection to baidu.com port 80 [tcp/http] succeeded!
+
+nc -vz genokit.cn 80
+# Connection to genokit.cn port 80 [tcp/http] succeeded!
+```
+
+- 查看网站背后对应的公网IP
+```bash
+dig +short baidu.com
+111.63.65.103
+124.237.177.164
+111.63.65.247
+110.242.74.102
+```
