@@ -530,6 +530,13 @@ $ rm -rf results
 $ meme-chip -meme-maxw 10 -meme-minw 5 -o results sequences.fa
 ```
 
+- fasta with line width
+```bash
+# fasta 每一行等长60字符输出
+cat xx.fasta | fold -w 60 > cat yy.fasta
+```
+
+
 ### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
 
