@@ -21,7 +21,37 @@ drain/drained: 停止接收新作业，等待旧作业结束。
 $ scontrol show node |  grep "mem=" | grep "cpu=" | cut -d , -f 1 | cut -d = -f 3 | awk '{sum+=$1}END{print sum}'
 ```
 
+- 查看集群的全部节点和内存
+```bash
+# %N  节点名
+# %c  CPU 核心数
+# %m  内存大小，单位 MiB
+# %t  节点状态
 
+sinfo -N -h -o "%N %c %m" | awk '{printf "%-15s CPU=%-5s Memory=%.1f GB\n",$1,$2,$3/1024}'
+```
+
+- 日常巡检
+```bash
+%N：节点名
+%C：CPU 状态，格式是 allocated/idle/other/total
+%m：节点总内存，MiB
+%e：节点当前空闲内存，MiB
+%T：节点状态
+
+# 简写
+sinfo -N -o "%N %C %m %e %T"
+
+# 全称
+sinfo -N -O NodeList,CPUsState,Memory,AllocMem,FreeMem,StateLong
+
+# 格式化输出
+sinfo -N -h -O NodeList,CPUsState,Memory,AllocMem,FreeMem,StateLong | \
+awk '{
+    printf "%-8s CPU(A/I/O/T)=%-13s Total=%.1fG Alloc=%.1fG Free=%.1fG State=%s\n",
+    $1,$2,$3/1024,$4/1024,$5/1024,$6
+}'
+```
 
 ### squeue
 任务查看
