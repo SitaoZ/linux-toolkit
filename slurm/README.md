@@ -54,6 +54,32 @@ awk '{
 ```
 
 ### squeue
+- 任务状态
+```bash
+
+idle
+= 完全空闲
+= CPUAlloc = 0
+
+mixed
+= 部分资源已使用，部分仍空闲
+= 0 < CPUAlloc < CPUTot
+
+idle
+0/64/0/64
+
+mixed
+16/48/0/64
+
+allocated
+64/0/0/64
+```
+
+看所有 mixed 节点上的任务
+```bash
+squeue -o "%.18i %.10u %.20j %.8T %.8C %.10m %.20R"
+```
+
 任务查看
 
 ```bash
@@ -76,6 +102,7 @@ squeue -o "%.18i %.9P %.12j %.12u %.12T %.12M %.16l %.6D %R" -u zhusitao
 echo "alias sq='squeue -o "%.18i %.9P %.12j %.12u %.12T %.12M %.16l %.6D %R" -u zhusitao'" >> ~/.bashrc
 
 ```
+
 ### sbatch 
 
 ```bash
